@@ -1,0 +1,1296 @@
+```html
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaspol Bed - Spesialis Kasur Nyaman & Berkualitas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            950: '#071124',
+                            900: '#0B1938',
+                            800: '#132752',
+                            700: '#1E3A75',
+                        },
+                        gold: {
+                            400: '#FACC15',
+                            500: '#EAB308',
+                            600: '#CA8A04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar & subtle transitions */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #132752;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #EAB308;
+        }
+        .glass-nav {
+            background: rgba(11, 25, 56, 0.92);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-gold-500 selection:text-navy-950">
+
+    <!-- Toast Notification Container (Pengganti alert) -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-navy-800 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-navy-950 shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-bed text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-display font-extrabold text-xl tracking-tight text-white">GASPOL <span class="text-gold-400">BED</span></span>
+                        <p class="text-[11px] text-slate-300 -mt-1 hidden sm:block">Tidur Pulas, Hidup Gaspol!</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#katalog" class="text-slate-200 hover:text-gold-400 transition-colors">Katalog & Harga</a>
+                    <a href="#cara-pesan" class="text-slate-200 hover:text-gold-400 transition-colors">Cara Pemesanan</a>
+                    <a href="#pembayaran" class="text-slate-200 hover:text-gold-400 transition-colors">Pembayaran & Jam Buka</a>
+                </nav>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <button onclick="openAdminModal()" id="admin-nav-btn" class="px-3.5 py-2 rounded-xl bg-navy-800 hover:bg-navy-700 border border-navy-700 text-xs sm:text-sm font-medium text-slate-200 flex items-center gap-2 transition-all">
+                        <i class="fa-solid fa-shield-halved text-gold-400"></i>
+                        <span id="admin-btn-text">Admin</span>
+                    </button>
+                    <a href="#katalog" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span class="hidden sm:inline">Pesan Sekarang</span>
+                        <span class="sm:hidden">Order</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-navy-900 text-white overflow-hidden">
+        <!-- Decorative Background Gradients -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gold-500 blur-3xl"></div>
+            <div class="absolute bottom-0 left-10 w-80 h-80 rounded-full bg-blue-500 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-navy-800/90 border border-gold-500/30 text-gold-400 text-xs sm:text-sm font-semibold">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>Bisa Antar Sampai Rumah atau Ambil di Toko</span>
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                        Istirahat Maksimal dengan Kasur Terbaik dari <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-amber-200">Gaspol Bed</span>
+                    </h1>
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+                        Tersedia berbagai pilihan ukuran mulai dari Single (90x200) hingga King Size (180x200). Harga transparan, stok terupdate, pembayaran fleksibel via <strong>DANA</strong> atau <strong>Cash (Tunai)</strong>.
+                    </p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="#katalog" class="px-6 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-sm sm:text-base shadow-lg shadow-gold-500/20 transition-all flex items-center gap-2">
+                            <span>Lihat Daftar Harga Kasur</span>
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                        <a href="https://wa.me/6289665165123?text=Halo%20Admin%20Gaspol%20Bed,%20saya%20ingin%20tanya-tanya%20produk%20kasur." target="_blank" class="px-6 py-3.5 rounded-xl bg-navy-800 hover:bg-navy-700 border border-slate-600 text-white font-semibold text-sm sm:text-base transition-all flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
+                            <span>Chat WA: 0896-6516-5123</span>
+                        </a>
+                    </div>
+                    <!-- Quick Highlights -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-navy-800/80 max-w-lg">
+                        <div>
+                            <p class="text-gold-400 font-display font-bold text-xl sm:text-2xl">4 Ukuran</p>
+                            <p class="text-xs text-slate-400">90x200 s/d 180x200</p>
+                        </div>
+                        <div>
+                            <p class="text-gold-400 font-display font-bold text-xl sm:text-2xl">COD / DANA</p>
+                            <p class="text-xs text-slate-400">Bayar Praktis & Aman</p>
+                        </div>
+                        <div>
+                            <p class="text-gold-400 font-display font-bold text-xl sm:text-2xl">Fast Delivery</p>
+                            <p class="text-xs text-slate-400">Antar Langsung ke Rumah</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Card -->
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-3xl overflow-hidden border-2 border-gold-500/30 shadow-2xl bg-navy-800">
+                        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" 
+                             onerror="this.src='https://placehold.co/800x600/132752/FACC15?text=Gaspol+Bed+Premium'"
+                             alt="Kasur Nyaman Gaspol Bed" 
+                             class="w-full h-72 sm:h-96 object-cover">
+                        <div class="p-5 bg-gradient-to-t from-navy-950 via-navy-900 to-navy-900/95">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-gold-400 font-bold">Koleksi Unggulan</span>
+                                    <h3 class="font-display font-bold text-lg text-white">Kualitas Busa & Spring Terbaik</h3>
+                                </div>
+                                <span class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold">
+                                    Ready Stock
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Katalog & Filter Section -->
+    <section id="katalog" class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+                <span class="text-gold-600 font-bold text-xs uppercase tracking-widest">Daftar Harga & Stok</span>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900 mt-1">Katalog Kasur Gaspol Bed</h2>
+                <p class="text-slate-600 text-sm sm:text-base mt-1">Pilih ukuran kasur yang sesuai untuk melihat harga pasti dan langsung pesan via WhatsApp.</p>
+            </div>
+            <div id="catalog-count" class="text-sm font-medium text-slate-500 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm self-start md:self-auto">
+                Menampilkan 0 produk
+            </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80 mb-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Cari Nama Kasur -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Cari Nama Kasur</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="filter-search" oninput="renderProducts()" placeholder="Contoh: Orthopedic, Busa..." 
+                               class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-navy-800 focus:border-navy-800">
+                    </div>
+                </div>
+
+                <!-- Filter Ukuran -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Filter Ukuran Kasur</label>
+                    <select id="filter-size" onchange="renderProducts()" 
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-navy-800">
+                        <option value="all">Semua Ukuran</option>
+                        <option value="90x200">90 x 200 cm (Single)</option>
+                        <option value="120x200">120 x 200 cm (Super Single)</option>
+                        <option value="160x200">160 x 200 cm (Queen)</option>
+                        <option value="180x200">180 x 200 cm (King)</option>
+                    </select>
+                </div>
+
+                <!-- Filter Rentang Harga -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Rentang Harga</label>
+                    <select id="filter-price" onchange="renderProducts()" 
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-navy-800">
+                        <option value="all">Semua Harga</option>
+                        <option value="under1m">Di bawah Rp 1.000.000</option>
+                        <option value="1m-2m">Rp 1.000.000 - Rp 2.000.000</option>
+                        <option value="above2m">Di atas Rp 2.000.000</option>
+                    </select>
+                </div>
+
+                <!-- Reset Filter -->
+                <div class="flex items-end">
+                    <button onclick="resetFilters()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>Reset Filter</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Kartu produk akan dirender otomatis oleh JavaScript -->
+        </div>
+
+        <!-- Tabel Ringkasan Harga Berdasarkan Ukuran -->
+        <div class="mt-14 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-5 sm:p-6 bg-navy-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                    <h3 class="font-display font-bold text-lg sm:text-xl">Tabel Daftar Harga Lengkap Berdasarkan Ukuran</h3>
+                    <p class="text-slate-300 text-xs sm:text-sm">Perbandingan harga cepat semua varian kasur di Gaspol Bed</p>
+                </div>
+                <span class="text-xs bg-gold-500 text-navy-950 font-bold px-3 py-1 rounded-lg self-start sm:self-auto">Update Real-Time</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-navy-900 text-xs uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3.5 px-4 font-bold">Nama Kasur</th>
+                            <th class="py-3.5 px-4 font-bold">90x200</th>
+                            <th class="py-3.5 px-4 font-bold">120x200</th>
+                            <th class="py-3.5 px-4 font-bold">160x200</th>
+                            <th class="py-3.5 px-4 font-bold">180x200</th>
+                            <th class="py-3.5 px-4 font-bold text-center">Total Stok</th>
+                        </tr>
+                    </thead>
+                    <tbody id="price-summary-table" class="divide-y divide-slate-200 text-sm">
+                        <!-- Baris tabel dirender lewat JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cara Pemesanan & Jam Operasional Section -->
+    <section id="cara-pesan" class="py-14 sm:py-20 bg-navy-950 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-gold-400 font-bold text-xs uppercase tracking-widest">Fleksibel & Mudah</span>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold mt-1">Waktu & Bentuk Pemesanan</h2>
+                <p class="text-slate-300 text-sm sm:text-base mt-2">Pilih cara belanja yang paling nyaman untuk Anda, baik datang langsung maupun pesan dari rumah.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Beli Langsung di Toko -->
+                <div class="bg-navy-900 border border-navy-800 rounded-2xl p-6 hover:border-gold-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/15 text-gold-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-2">1. Datang Langsung ke Toko</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Kunjungi toko fisik <strong>Gaspol Bed</strong> untuk mencoba langsung keempukan kasur dan memilih unit secara langsung di tempat.
+                    </p>
+                    <div class="p-3 rounded-xl bg-navy-950/70 border border-navy-800 text-xs text-slate-300 space-y-1">
+                        <p><strong class="text-gold-400">Senin - Sabtu:</strong> 08.00 - 20.00 WIB</p>
+                        <p><strong class="text-gold-400">Minggu / Libur:</strong> 09.00 - 17.00 WIB</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Pesan Online & Antar Sampai Rumah -->
+                <div class="bg-navy-900 border border-navy-800 rounded-2xl p-6 hover:border-gold-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-2">2. Order Online & Antar Rumah</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Tidak sempat keluar rumah? Klik tombol <strong>Pesan via WA</strong> pada katalog, isi alamat pengiriman, dan armada Gaspol Bed siap mengantar kasur sampai depan pintu rumah Anda.
+                    </p>
+                    <div class="p-3 rounded-xl bg-navy-950/70 border border-navy-800 text-xs text-slate-300 space-y-1">
+                        <p><strong class="text-emerald-400">Order WA 24 Jam:</strong> 0896-6516-5123</p>
+                        <p><strong class="text-emerald-400">Jadwal Kirim:</strong> Setiap hari (08.30 - 19.00 WIB)</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Metode Pembayaran -->
+                <div id="pembayaran" class="bg-navy-900 border border-navy-800 rounded-2xl p-6 hover:border-gold-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-2">3. Pembayaran DANA & Cash</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Transaksi aman dan tanpa ribet dengan dua pilihan metode pembayaran utama yang mendukung pembayaran di toko maupun di rumah (COD).
+                    </p>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div class="p-3 rounded-xl bg-sky-500/10 border border-sky-500/30 text-center">
+                            <span class="block font-display font-extrabold text-sky-400 text-base">DANA</span>
+                            <span class="text-[11px] text-slate-300">Transfer / QRIS DANA</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-gold-500/10 border border-gold-500/30 text-center">
+                            <span class="block font-display font-extrabold text-gold-400 text-base">CASH</span>
+                            <span class="text-[11px] text-slate-300">Tunai di Toko / COD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 border-t border-navy-800 text-slate-300 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gold-500 flex items-center justify-center text-navy-950">
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+                <div>
+                    <p class="font-display font-bold text-white text-lg">GASPOL BED</p>
+                    <p class="text-xs text-slate-400">Solusi Kasur Berkualitas & Harga Bersahabat</p>
+                </div>
+            </div>
+            <div class="text-center md:text-right text-xs sm:text-sm space-y-1">
+                <p>Order Cepat WhatsApp: <a href="https://wa.me/6289665165123" target="_blank" class="text-gold-400 font-bold hover:underline">0896-6516-5123</a></p>
+                <p class="text-slate-400">&copy; 2026 Gaspol Bed. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 1: FORM PEMESANAN WHATSAPP (INTERAKTIF)                         -->
+    <!-- ===================================================================== -->
+    <div id="order-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy-950/80 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden my-auto animate-fadeIn">
+            <!-- Header Modal -->
+            <div class="bg-navy-900 text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-2xl"></i>
+                    <div>
+                        <h3 class="font-display font-bold text-lg">Form Pemesanan Gaspol Bed</h3>
+                        <p class="text-xs text-slate-300">Pesan otomatis diteruskan ke WA: 089665165123</p>
+                    </div>
+                </div>
+                <button onclick="closeOrderModal()" class="w-8 h-8 rounded-full bg-navy-800 hover:bg-navy-700 flex items-center justify-center text-slate-300">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Form Body -->
+            <form id="whatsapp-order-form" onsubmit="submitWhatsAppOrder(event)" class="p-6 space-y-4">
+                <!-- Produk Terpilih -->
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3.5">
+                    <img id="order-product-img" src="" alt="Kasur" class="w-16 h-16 rounded-xl object-cover bg-slate-200">
+                    <div class="flex-1">
+                        <h4 id="order-product-name" class="font-display font-bold text-navy-900 text-base">Nama Kasur</h4>
+                        <p class="text-xs text-slate-500">Sisa stok tersedia: <span id="order-product-stock" class="font-bold text-emerald-600">0</span> unit</p>
+                        <p id="order-product-price" class="font-bold text-gold-600 text-base mt-0.5">Rp 0</p>
+                    </div>
+                </div>
+
+                <!-- Pilih Ukuran & Jumlah -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="col-span-2">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Pilih Ukuran Kasur</label>
+                        <select id="order-size-select" onchange="updateOrderPrice()" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:ring-2 focus:ring-navy-800">
+                            <!-- Diisi via JS -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Jumlah</label>
+                        <input type="number" id="order-qty" value="1" min="1" onchange="updateOrderPrice()" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-bold text-center focus:ring-2 focus:ring-navy-800">
+                    </div>
+                </div>
+
+                <!-- Nama Pembeli -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Pembeli *</label>
+                    <input type="text" id="order-customer-name" required placeholder="Masukkan nama Anda..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-navy-800">
+                </div>
+
+                <!-- Metode Pengambilan / Pengiriman -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Bentuk Pemesanan / Pengambilan *</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <label class="cursor-pointer border rounded-xl p-3 flex items-start gap-2.5 has-[:checked]:border-navy-800 has-[:checked]:bg-navy-900/5 transition-all">
+                            <input type="radio" name="deliveryMethod" value="Pesan Online & Diantar Sampai Rumah" checked onchange="toggleAddressField()" class="mt-1 accent-navy-900">
+                            <div>
+                                <span class="block text-xs font-bold text-navy-900">Antar Sampai Rumah</span>
+                                <span class="text-[11px] text-slate-500">Order online dikirim kurir toko</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer border rounded-xl p-3 flex items-start gap-2.5 has-[:checked]:border-navy-800 has-[:checked]:bg-navy-900/5 transition-all">
+                            <input type="radio" name="deliveryMethod" value="Beli & Ambil Langsung di Toko Gaspol Bed" onchange="toggleAddressField()" class="mt-1 accent-navy-900">
+                            <div>
+                                <span class="block text-xs font-bold text-navy-900">Ambil di Toko</span>
+                                <span class="text-[11px] text-slate-500">Datang ke toko Gaspol Bed</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Input Alamat (Muncul jika Antar Rumah) -->
+                <div id="address-field-wrapper">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Alamat Lengkap Pengiriman *</label>
+                    <textarea id="order-address" rows="2" required placeholder="Contoh: Jl. Merdeka No. 12, RT 02/RW 05, Patokan dekat masjid..." class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-navy-800"></textarea>
+                </div>
+
+                <!-- Waktu Pengiriman / Pengambilan -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Rencana Waktu Pengiriman / Kedatangan</label>
+                    <input type="text" id="order-time" placeholder="Contoh: Hari ini jam 4 sore / Besok pagi" value="Secepatnya hari ini" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-navy-800">
+                </div>
+
+                <!-- Metode Pembayaran -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Metode Pembayaran *</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="cursor-pointer border rounded-xl p-3 flex items-center gap-2.5 has-[:checked]:border-sky-600 has-[:checked]:bg-sky-50 transition-all">
+                            <input type="radio" name="paymentMethod" value="DANA" checked class="accent-sky-600">
+                            <div>
+                                <span class="block text-xs font-extrabold text-sky-700">DANA</span>
+                                <span class="text-[11px] text-slate-500">Transfer E-Wallet</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer border rounded-xl p-3 flex items-center gap-2.5 has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50 transition-all">
+                            <input type="radio" name="paymentMethod" value="Cash / Tunai" class="accent-amber-600">
+                            <div>
+                                <span class="block text-xs font-extrabold text-amber-700">Cash / Tunai</span>
+                                <span class="text-[11px] text-slate-500">Bayar di Tempat (COD)</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Total & Submit -->
+                <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-slate-500 block">Estimasi Total Bayar</span>
+                        <span id="order-total-display" class="font-display font-extrabold text-xl text-navy-900">Rp 0</span>
+                    </div>
+                    <button type="submit" class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/20 flex items-center gap-2 transition-all">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Kirim Order ke WA</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 2: PANEL ADMIN (LOGIN TOKEN 1234 & CRUD PRODUK)                 -->
+    <!-- ===================================================================== -->
+    <div id="admin-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy-950/85 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-4xl w-full shadow-2xl border border-slate-200 overflow-hidden my-auto">
+            <!-- Header Admin -->
+            <div class="bg-navy-900 text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-gold-500 text-navy-950 flex items-center justify-center">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg">Pengaturan Admin Gaspol Bed</h3>
+                        <p class="text-xs text-slate-300">Kelola foto, harga ukuran, dan stok produk kasur</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="admin-logout-btn" onclick="logoutAdmin()" class="hidden px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold">
+                        Keluar
+                    </button>
+                    <button onclick="closeAdminModal()" class="w-8 h-8 rounded-full bg-navy-800 hover:bg-navy-700 flex items-center justify-center text-slate-300">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- VIEW A: FORM LOGIN TOKEN -->
+            <div id="admin-login-view" class="p-8 max-w-md mx-auto text-center space-y-5">
+                <div class="w-16 h-16 rounded-2xl bg-navy-900/10 text-navy-900 mx-auto flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-xl text-navy-900">Akses Khusus Admin</h4>
+                    <p class="text-sm text-slate-500 mt-1">Masukkan token keamanan untuk menambah, mengedit, atau menghapus produk.</p>
+                </div>
+                <form onsubmit="verifyAdminToken(event)" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Token Admin</label>
+                        <input type="password" id="admin-token-input" required placeholder="Masukkan token akses..." 
+                               class="w-full px-4 py-3 rounded-xl border border-slate-300 text-center font-bold tracking-widest text-lg focus:outline-none focus:ring-2 focus:ring-navy-900">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-navy-900 hover:bg-navy-800 text-gold-400 font-bold text-sm shadow-md transition-all">
+                        Masuk ke Panel Admin
+                    </button>
+                </form>
+            </div>
+
+            <!-- VIEW B: DASHBOARD KELOLA PRODUK -->
+            <div id="admin-dashboard-view" class="hidden p-6 max-h-[82vh] overflow-y-auto space-y-6">
+                <!-- Form Tambah / Edit Produk -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 id="admin-form-title" class="font-display font-bold text-base text-navy-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-plus text-gold-600"></i>
+                            <span>Tambah Kasur Baru</span>
+                        </h4>
+                        <button type="button" id="cancel-edit-btn" onclick="resetAdminForm()" class="hidden text-xs font-bold text-rose-600 hover:underline">
+                            Batal Edit
+                        </button>
+                    </div>
+
+                    <form id="admin-product-form" onsubmit="saveProduct(event)" class="space-y-4">
+                        <input type="hidden" id="edit-product-id">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Nama & Deskripsi -->
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Kasur *</label>
+                                    <input type="text" id="prod-name" required placeholder="Contoh: Gaspol Orthopedic Plus" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat</label>
+                                    <input type="text" id="prod-desc" placeholder="Contoh: Busa density tinggi, garansi 10 tahun" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Jumlah Stok (Unit) *</label>
+                                    <input type="number" id="prod-stock" required min="0" value="5" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm bg-white font-bold">
+                                </div>
+                            </div>
+
+                            <!-- Foto Produk (URL atau Upload File) -->
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Kasur</label>
+                                    <input type="text" id="prod-img-url" oninput="previewAdminImage()" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Atau Upload Foto dari Perangkat</label>
+                                    <input type="file" id="prod-img-file" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-navy-900 file:text-white hover:file:bg-navy-800">
+                                </div>
+                                <div class="flex items-center gap-3 pt-1">
+                                    <img id="admin-img-preview" src="https://placehold.co/120x80/132752/FACC15?text=Preview" alt="Preview" class="w-24 h-16 rounded-xl object-cover border border-slate-300 bg-white">
+                                    <span class="text-[11px] text-slate-500">Preview foto yang akan tampil di katalog pembeli.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pengaturan Harga per Ukuran -->
+                        <div class="pt-2">
+                            <label class="block text-xs font-bold text-navy-900 mb-2">Atur Harga Berdasarkan Ukuran (Rp) — *Isi 0 jika ukuran tidak tersedia*</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                                    <span class="block text-[11px] font-bold text-slate-500">90 x 200 cm</span>
+                                    <input type="number" id="price-90x200" min="0" step="10000" value="850000" required class="w-full mt-1 px-2 py-1.5 rounded-lg border border-slate-300 text-sm font-bold text-navy-900">
+                                </div>
+                                <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                                    <span class="block text-[11px] font-bold text-slate-500">120 x 200 cm</span>
+                                    <input type="number" id="price-120x200" min="0" step="10000" value="1150000" required class="w-full mt-1 px-2 py-1.5 rounded-lg border border-slate-300 text-sm font-bold text-navy-900">
+                                </div>
+                                <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                                    <span class="block text-[11px] font-bold text-slate-500">160 x 200 cm</span>
+                                    <input type="number" id="price-160x200" min="0" step="10000" value="1650000" required class="w-full mt-1 px-2 py-1.5 rounded-lg border border-slate-300 text-sm font-bold text-navy-900">
+                                </div>
+                                <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                                    <span class="block text-[11px] font-bold text-slate-500">180 x 200 cm</span>
+                                    <input type="number" id="price-180x200" min="0" step="10000" value="1950000" required class="w-full mt-1 px-2 py-1.5 rounded-lg border border-slate-300 text-sm font-bold text-navy-900">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                            <button type="button" onclick="resetDefaultCatalog()" class="text-xs text-slate-500 hover:text-navy-900 underline">
+                                Kembalikan Data Bawaan Pabrik
+                            </button>
+                            <button type="submit" class="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                <span id="admin-submit-label">Simpan Produk ke Katalog</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Daftar Produk Terdaftar (Untuk Edit / Hapus) -->
+                <div>
+                    <h4 class="font-display font-bold text-base text-navy-900 mb-3">Daftar Kasur Saat Ini (<span id="admin-total-items">0</span>)</h4>
+                    <div id="admin-product-list" class="space-y-3">
+                        <!-- List produk untuk admin dirender lewat JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // =========================================================================
+        // 1. KONFIGURASI & DATA AWAL (DEFAULT CATALOG)
+        // =========================================================================
+        const STORAGE_KEY = 'gaspol_bed_products_v1';
+        const ADMIN_SESSION_KEY = 'gaspol_bed_admin_auth';
+        const ADMIN_TOKEN = '1234';
+        const WHATSAPP_NUMBER = '6289665165123';
+
+        const defaultProducts = [
+            {
+                id: 'kasur-1',
+                name: 'Gaspol Royal Orthopedic',
+                description: 'Kasur kesehatan tulang belakang dengan busa high-density & kain knitting lembut.',
+                image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80',
+                stock: 8,
+                prices: {
+                    '90x200': 950000,
+                    '120x200': 1250000,
+                    '160x200': 1750000,
+                    '180x200': 2150000
+                }
+            },
+            {
+                id: 'kasur-2',
+                name: 'Gaspol Super Foam Comfort',
+                description: 'Kasur busa empuk anti kempes, ringan dipindahkan, dan sangat nyaman untuk keluarga.',
+                image: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=800&q=80',
+                stock: 12,
+                prices: {
+                    '90x200': 750000,
+                    '120x200': 980000,
+                    '160x200': 1400000,
+                    '180x200': 1680000
+                }
+            },
+            {
+                id: 'kasur-3',
+                name: 'Gaspol Luxury Pocket Spring',
+                description: 'Per independen meredam getaran saat pasangan bergerak, lapisan pillow top mewah.',
+                image: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80',
+                stock: 4,
+                prices: {
+                    '90x200': 1450000,
+                    '120x200': 1850000,
+                    '160x200': 2450000,
+                    '180x200': 2890000
+                }
+            },
+            {
+                id: 'kasur-4',
+                name: 'Gaspol Ekonomis Smart Bed',
+                description: 'Pilihan hemat untuk kamar kos, anak, maupun kamar tamu dengan daya tahan optimal.',
+                image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+                stock: 15,
+                prices: {
+                    '90x200': 590000,
+                    '120x200': 790000,
+                    '160x200': 1100000,
+                    '180x200': 1350000
+                }
+            }
+        ];
+
+        let products = [];
+        let selectedSizes = {}; // Menyimpan ukuran aktif yang dipilih pada masing-masing kartu produk
+        let currentOrderProduct = null;
+
+        // =========================================================================
+        // 2. INISIALISASI & PENYIMPANAN LOCALSTORAGE
+        // =========================================================================
+        function loadProducts() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    products = JSON.parse(saved);
+                } else {
+                    products = [...defaultProducts];
+                    saveToLocalStorage();
+                }
+            } catch (e) {
+                console.error('Gagal memuat localStorage:', e);
+                products = [...defaultProducts];
+            }
+
+            // Set default ukuran terpilih untuk setiap produk
+            products.forEach(p => {
+                if (!selectedSizes[p.id]) {
+                    const availableSizes = Object.keys(p.prices).filter(sz => p.prices[sz] > 0);
+                    selectedSizes[p.id] = availableSizes.includes('160x200') ? '160x200' : (availableSizes[0] || '90x200');
+                }
+            });
+        }
+
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+            } catch (e) {
+                showToast('Peringatan: Memori browser penuh, coba gunakan URL foto daripada upload file besar.', 'error');
+            }
+        }
+
+        function formatRupiah(angka) {
+            if (!angka || angka <= 0) return 'Kosong';
+            return 'Rp ' + Number(angka).toLocaleString('id-ID');
+        }
+
+        // =========================================================================
+        // 3. NOTIFIKASI TOAST (PENGGANTI ALERT)
+        // =========================================================================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const colors = type === 'error' 
+                ? 'bg-rose-600 text-white border-rose-700' 
+                : 'bg-navy-900 text-white border-gold-500';
+            const icon = type === 'error' 
+                ? '<i class="fa-solid fa-circle-exclamation text-rose-200"></i>' 
+                : '<i class="fa-solid fa-circle-check text-gold-400"></i>';
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl border shadow-xl text-sm font-medium transition-all duration-300 transform translate-y-0 ${colors}`;
+            toast.innerHTML = `${icon}<span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3200);
+        }
+
+        // =========================================================================
+        // 4. RENDER KATALOG PRODUK & TABEL HARGA
+        // =========================================================================
+        function selectProductSize(productId, size) {
+            selectedSizes[productId] = size;
+            renderProducts();
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-search').value = '';
+            document.getElementById('filter-size').value = 'all';
+            document.getElementById('filter-price').value = 'all';
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            const searchKeyword = document.getElementById('filter-search').value.toLowerCase().trim();
+            const sizeFilter = document.getElementById('filter-size').value;
+            const priceFilter = document.getElementById('filter-price').value;
+
+            const filtered = products.filter(product => {
+                // Filter nama/deskripsi
+                const matchSearch = product.name.toLowerCase().includes(searchKeyword) || 
+                                    (product.description && product.description.toLowerCase().includes(searchKeyword));
+                if (!matchSearch) return false;
+
+                // Tentukan ukuran acuan untuk cek harga & ketersediaan
+                let checkSize = sizeFilter !== 'all' ? sizeFilter : (selectedSizes[product.id] || '160x200');
+                
+                // Jika user filter ukuran spesifik, otomatis pilih ukuran tersebut di kartu
+                if (sizeFilter !== 'all') {
+                    if (!product.prices[sizeFilter] || product.prices[sizeFilter] <= 0) return false;
+                    selectedSizes[product.id] = sizeFilter;
+                    checkSize = sizeFilter;
+                }
+
+                const price = product.prices[checkSize] || 0;
+
+                // Filter rentang harga
+                if (priceFilter === 'under1m' && price >= 1000000) return false;
+                if (priceFilter === '1m-2m' && (price < 1000000 || price > 2000000)) return false;
+                if (priceFilter === 'above2m' && price <= 2000000) return false;
+
+                return true;
+            });
+
+            document.getElementById('catalog-count').textContent = `Menampilkan ${filtered.length} dari ${products.length} kasur`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-white rounded-2xl p-12 text-center border border-slate-200">
+                        <i class="fa-solid fa-bed text-4xl text-slate-300 mb-3"></i>
+                        <h3 class="font-display font-bold text-lg text-navy-900">Kasur Tidak Ditemukan</h3>
+                        <p class="text-slate-500 text-sm mt-1">Coba ubah filter ukuran atau rentang harga untuk melihat pilihan kasur lainnya.</p>
+                        <button onclick="resetFilters()" class="mt-4 px-4 py-2 rounded-xl bg-navy-900 text-white text-xs font-bold">Reset Filter</button>
+                    </div>
+                `;
+            } else {
+                grid.innerHTML = filtered.map(product => {
+                    const activeSize = selectedSizes[product.id] || '160x200';
+                    const activePrice = product.prices[activeSize] || 0;
+                    const isOutOfStock = product.stock <= 0;
+                    const sizes = ['90x200', '120x200', '160x200', '180x200'];
+
+                    const sizeButtonsHtml = sizes.map(sz => {
+                        const available = product.prices[sz] && product.prices[sz] > 0;
+                        const isSelected = activeSize === sz;
+                        if (!available) {
+                            return `<button disabled class="py-1.5 px-2 rounded-lg text-xs font-medium bg-slate-100 text-slate-300 line-through cursor-not-allowed">${sz}</button>`;
+                        }
+                        return `
+                            <button onclick="selectProductSize('${product.id}', '${sz}')" 
+                                    class="py-1.5 px-2 rounded-lg text-xs font-bold transition-all border ${
+                                        isSelected 
+                                        ? 'bg-navy-900 text-gold-400 border-navy-900 shadow-sm' 
+                                        : 'bg-white text-slate-700 border-slate-200 hover:border-navy-800'
+                                    }">
+                                ${sz}
+                            </button>
+                        `;
+                    }).join('');
+
+                    return `
+                        <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+                            <!-- Foto Kasur -->
+                            <div class="relative h-56 bg-slate-100 overflow-hidden group">
+                                <img src="${product.image}" 
+                                     onerror="this.src='https://placehold.co/600x400/132752/FACC15?text=${encodeURIComponent(product.name)}'"
+                                     alt="${product.name}" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                
+                                <!-- Badge Stok -->
+                                <div class="absolute top-3.5 right-3.5">
+                                    ${isOutOfStock 
+                                        ? `<span class="px-3 py-1 rounded-full bg-rose-600 text-white text-xs font-bold shadow">Stok Habis</span>`
+                                        : `<span class="px-3 py-1 rounded-full bg-navy-900/90 text-gold-400 border border-gold-500/40 text-xs font-bold shadow backdrop-blur-sm">Stok: ${product.stock} Unit</span>`
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Konten Kartu -->
+                            <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-5">
+                                <div>
+                                    <h3 class="font-display font-bold text-xl text-navy-900">${product.name}</h3>
+                                    <p class="text-slate-500 text-xs sm:text-sm mt-1 line-clamp-2">${product.description || 'Kasur berkualitas tinggi dengan kenyamanan ekstra.'}</p>
+
+                                    <!-- Pilihan Ukuran -->
+                                    <div class="mt-4">
+                                        <span class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Pilih Ukuran (cm):</span>
+                                        <div class="grid grid-cols-4 gap-1.5">
+                                            ${sizeButtonsHtml}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Harga & Tombol Order -->
+                                <div class="pt-4 border-t border-slate-100">
+                                    <div class="flex items-end justify-between mb-3.5">
+                                        <div>
+                                            <span class="text-xs text-slate-400 block">Harga Ukuran ${activeSize}</span>
+                                            <span class="font-display font-extrabold text-2xl text-navy-900">${formatRupiah(activePrice)}</span>
+                                        </div>
+                                        <span class="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">
+                                            DANA / Cash
+                                        </span>
+                                    </div>
+
+                                    <button onclick="openOrderModal('${product.id}')" 
+                                            ${isOutOfStock || activePrice <= 0 ? 'disabled' : ''}
+                                            class="w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
+                                                isOutOfStock || activePrice <= 0
+                                                ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                                                : 'bg-gold-500 hover:bg-gold-400 text-navy-950 shadow-md shadow-gold-500/20'
+                                            }">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                                        <span>${isOutOfStock ? 'Stok Kosong' : 'Pesan via WhatsApp'}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            renderPriceSummaryTable();
+        }
+
+        function renderPriceSummaryTable() {
+            const tbody = document.getElementById('price-summary-table');
+            tbody.innerHTML = products.map(p => `
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3.5 px-4 font-bold text-navy-900">${p.name}</td>
+                    <td class="py-3.5 px-4 text-slate-700">${formatRupiah(p.prices['90x200'])}</td>
+                    <td class="py-3.5 px-4 text-slate-700">${formatRupiah(p.prices['120x200'])}</td>
+                    <td class="py-3.5 px-4 text-slate-700">${formatRupiah(p.prices['160x200'])}</td>
+                    <td class="py-3.5 px-4 text-slate-700">${formatRupiah(p.prices['180x200'])}</td>
+                    <td class="py-3.5 px-4 text-center">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold ${p.stock > 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
+                            ${p.stock > 0 ? p.stock + ' unit' : 'Habis'}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. MODAL PEMESANAN WHATSAPP (089665165123)
+        // =========================================================================
+        function openOrderModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            currentOrderProduct = product;
+            const activeSize = selectedSizes[product.id] || '160x200';
+
+            document.getElementById('order-product-img').src = product.image;
+            document.getElementById('order-product-name').textContent = product.name;
+            document.getElementById('order-product-stock').textContent = product.stock;
+            
+            const qtyInput = document.getElementById('order-qty');
+            qtyInput.max = product.stock;
+            qtyInput.value = 1;
+
+            // Isi opsi ukuran yang tersedia pada produk
+            const sizeSelect = document.getElementById('order-size-select');
+            const sizes = ['90x200', '120x200', '160x200', '180x200'];
+            sizeSelect.innerHTML = sizes
+                .filter(sz => product.prices[sz] && product.prices[sz] > 0)
+                .map(sz => `<option value="${sz}" ${sz === activeSize ? 'selected' : ''}>Ukuran ${sz} cm (${formatRupiah(product.prices[sz])})</option>`)
+                .join('');
+
+            updateOrderPrice();
+            toggleAddressField();
+
+            const modal = document.getElementById('order-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('order-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function updateOrderPrice() {
+            if (!currentOrderProduct) return;
+            const size = document.getElementById('order-size-select').value;
+            let qty = parseInt(document.getElementById('order-qty').value) || 1;
+            
+            if (qty > currentOrderProduct.stock) {
+                qty = currentOrderProduct.stock;
+                document.getElementById('order-qty').value = qty;
+            }
+            if (qty < 1) {
+                qty = 1;
+                document.getElementById('order-qty').value = 1;
+            }
+
+            const unitPrice = currentOrderProduct.prices[size] || 0;
+            const total = unitPrice * qty;
+
+            document.getElementById('order-product-price').textContent = `${formatRupiah(unitPrice)} / unit`;
+            document.getElementById('order-total-display').textContent = formatRupiah(total);
+        }
+
+        function toggleAddressField() {
+            const method = document.querySelector('input[name="deliveryMethod"]:checked').value;
+            const wrapper = document.getElementById('address-field-wrapper');
+            const addressInput = document.getElementById('order-address');
+
+            if (method.includes('Antar')) {
+                wrapper.classList.remove('hidden');
+                addressInput.required = true;
+            } else {
+                wrapper.classList.add('hidden');
+                addressInput.required = false;
+            }
+        }
+
+        function submitWhatsAppOrder(event) {
+            event.preventDefault();
+            if (!currentOrderProduct) return;
+
+            const size = document.getElementById('order-size-select').value;
+            const qty = parseInt(document.getElementById('order-qty').value) || 1;
+            const customerName = document.getElementById('order-customer-name').value.trim();
+            const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
+            const address = document.getElementById('order-address').value.trim();
+            const orderTime = document.getElementById('order-time').value.trim() || 'Secepatnya';
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+            const unitPrice = currentOrderProduct.prices[size] || 0;
+            const totalPrice = unitPrice * qty;
+
+            let message = `Halo Admin *Gaspol Bed*, saya ingin memesan kasur:\n\n`;
+            message += `🛏️ *Produk:* ${currentOrderProduct.name}\n`;
+            message += `📐 *Ukuran:* ${size} cm\n`;
+            message += `🔢 *Jumlah:* ${qty} unit\n`;
+            message += `💰 *Total Harga:* ${formatRupiah(totalPrice)}\n\n`;
+            message += `👤 *Nama Pembeli:* ${customerName}\n`;
+            message += `🚚 *Bentuk Pemesanan:* ${deliveryMethod}\n`;
+            if (deliveryMethod.includes('Antar')) {
+                message += `📍 *Alamat Kirim:* ${address}\n`;
+            }
+            message += `⏰ *Waktu:* ${orderTime}\n`;
+            message += `💳 *Pembayaran:* ${paymentMethod}\n\n`;
+            message += `Mohon info konfirmasi ketersediaan & proses selanjutnya. Terima kasih!`;
+
+            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+            closeOrderModal();
+            showToast('Mengarahkan ke WhatsApp Gaspol Bed...');
+        }
+
+        // =========================================================================
+        // 6. PANEL ADMIN (TOKEN: 1234 & KELOLA FOTO, HARGA, STOK)
+        // =========================================================================
+        function isAdminLoggedIn() {
+            return sessionStorage.getItem(ADMIN_SESSION_KEY) === 'true';
+        }
+
+        function updateAdminNavStatus() {
+            const btnText = document.getElementById('admin-btn-text');
+            if (isAdminLoggedIn()) {
+                btnText.textContent = 'Panel Admin';
+            } else {
+                btnText.textContent = 'Admin';
+            }
+        }
+
+        function openAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            if (isAdminLoggedIn()) {
+                showAdminDashboard();
+            } else {
+                document.getElementById('admin-login-view').classList.remove('hidden');
+                document.getElementById('admin-dashboard-view').classList.add('hidden');
+                document.getElementById('admin-logout-btn').classList.add('hidden');
+                document.getElementById('admin-token-input').value = '';
+                setTimeout(() => document.getElementById('admin-token-input').focus(), 100);
+            }
+        }
+
+        function closeAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function verifyAdminToken(event) {
+            event.preventDefault();
+            const inputToken = document.getElementById('admin-token-input').value.trim();
+
+            if (inputToken === ADMIN_TOKEN) {
+                sessionStorage.setItem(ADMIN_SESSION_KEY, 'true');
+                updateAdminNavStatus();
+                showAdminDashboard();
+                showToast('Login Admin berhasil! Selamat datang.');
+            } else {
+                showToast('Token salah! Akses ditolak.', 'error');
+                document.getElementById('admin-token-input').value = '';
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            updateAdminNavStatus();
+            closeAdminModal();
+            showToast('Anda telah keluar dari mode Admin.');
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('admin-login-view').classList.add('hidden');
+            document.getElementById('admin-dashboard-view').classList.remove('hidden');
+            document.getElementById('admin-logout-btn').classList.remove('hidden');
+            renderAdminProductList();
+        }
+
+        // Upload & Preview Foto di Panel Admin
+        function previewAdminImage() {
+            const url = document.getElementById('prod-img-url').value.trim();
+            const preview = document.getElementById('admin-img-preview');
+            preview.src = url || 'https://placehold.co/120x80/132752/FACC15?text=Preview';
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Kompresi gambar menggunakan canvas agar hemat memori localStorage
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 700;
+                    const scale = Math.min(1, MAX_WIDTH / img.width);
+                    canvas.width = img.width * scale;
+                    canvas.height = img.height * scale;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+                    document.getElementById('prod-img-url').value = compressedDataUrl;
+                    document.getElementById('admin-img-preview').src = compressedDataUrl;
+                    showToast('Foto berhasil dimuat!');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Tambah atau Simpan Edit Produk
+        function saveProduct(event) {
+            event.preventDefault();
+
+            const editId = document.getElementById('edit-product-id').value;
+            const name = document.getElementById('prod-name').value.trim();
+            const description = document.getElementById('prod-desc').value.trim();
+            const stock = parseInt(document.getElementById('prod-stock').value) || 0;
+            const image = document.getElementById('prod-img-url').value.trim() || 
+                          `https://placehold.co/600x400/132752/FACC15?text=${encodeURIComponent(name)}`;
+
+            const prices = {
+                '90x200': parseInt(document.getElementById('price-90x200').value) || 0,
+                '120x200': parseInt(document.getElementById('price-120x200').value) || 0,
+                '160x200': parseInt(document.getElementById('price-160x200').value) || 0,
+                '180x200': parseInt(document.getElementById('price-180x200').value) || 0,
+            };
+
+            if (editId) {
+                // Mode Update Produk
+                const idx = products.findIndex(p => p.id === editId);
+                if (idx !== -1) {
+                    products[idx] = { ...products[idx], name, description, stock, image, prices };
+                    showToast(`Produk "${name}" berhasil diperbarui!`);
+                }
+            } else {
+                // Mode Tambah Produk Baru
+                const newProduct = {
+                    id: 'kasur-' + Date.now(),
+                    name,
+                    description,
+                    stock,
+                    image,
+                    prices
+                };
+                products.unshift(newProduct);
+                selectedSizes[newProduct.id] = '160x200';
+                showToast(`Produk baru "${name}" ditambahkan ke katalog!`);
+            }
+
+            saveToLocalStorage();
+            resetAdminForm();
+            renderProducts();
+            renderAdminProductList();
+        }
+
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('edit-product-id').value = product.id;
+            document.getElementById('prod-name').value = product.name;
+            document.getElementById('prod-desc').value = product.description || '';
+            document.getElementById('prod-stock').value = product.stock;
+            document.getElementById('prod-img-url').value = product.image;
+            document.getElementById('admin-img-preview').src = product.image;
+
+            document.getElementById('price-90x200').value = product.prices['90x200'] || 0;
+            document.getElementById('price-120x200').value = product.prices['120x200'] || 0;
+            document.getElementById('price-160x200').value = product.prices['160x200'] || 0;
+            document.getElementById('price-180x200').value = product.prices['180x200'] || 0;
+
+            document.getElementById('admin-form-title').innerHTML = `<i class="fa-solid fa-pen-to-square text-gold-600"></i><span>Edit Kasur: ${product.name}</span>`;
+            document.getElementById('admin-submit-label').textContent = 'Simpan Perubahan';
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+
+            // Scroll ke atas modal admin
+            document.getElementById('admin-dashboard-view').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetAdminForm() {
+            document.getElementById('admin-product-form').reset();
+            document.getElementById('edit-product-id').value = '';
+            document.getElementById('admin-img-preview').src = 'https://placehold.co/120x80/132752/FACC15?text=Preview';
+            document.getElementById('admin-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-gold-600"></i><span>Tambah Kasur Baru</span>`;
+            document.getElementById('admin-submit-label').textContent = 'Simpan Produk ke Katalog';
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+        }
+
+        // Hapus Produk dengan konfirmasi klik ganda (tanpa window.confirm)
+        let deleteConfirmId = null;
+        function deleteProduct(productId) {
+            if (deleteConfirmId !== productId) {
+                deleteConfirmId = productId;
+                renderAdminProductList();
+                setTimeout(() => {
+                    if (deleteConfirmId === productId) {
+                        deleteConfirmId = null;
+                        renderAdminProductList();
+                    }
+                }, 4000);
+                return;
+            }
+
+            const target = products.find(p => p.id === productId);
+            products = products.filter(p => p.id !== productId);
+            deleteConfirmId = null;
+            saveToLocalStorage();
+            renderProducts();
+            renderAdminProductList();
+            showToast(`Produk "${target ? target.name : ''}" telah dihapus.`);
+        }
+
+        function resetDefaultCatalog() {
+            products = [...defaultProducts];
+            saveToLocalStorage();
+            renderProducts();
+            renderAdminProductList();
+            showToast('Katalog dikembalikan ke data awal.');
+        }
+
+        function renderAdminProductList() {
+            const listEl = document.getElementById('admin-product-list');
+            document.getElementById('admin-total-items').textContent = products.length;
+
+            if (products.length === 0) {
+                listEl.innerHTML = `<p class="text-sm text-slate-500 text-center py-6 bg-slate-50 rounded-xl">Belum ada produk kasur.</p>`;
+                return;
+            }
+
+            listEl.innerHTML = products.map(p => {
+                const isConfirming = deleteConfirmId === p.id;
+                return `
+                    <div class="p-3.5 rounded-2xl border border-slate-200 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-3.5">
+                            <img src="${p.image}" onerror="this.src='https://placehold.co/100x80/132752/FACC15?text=Kasur'" alt="${p.name}" class="w-16 h-16 rounded-xl object-cover bg-slate-100 shrink-0">
+                            <div>
+                                <h5 class="font-display font-bold text-navy-900 text-sm sm:text-base">${p.name}</h5>
+                                <p class="text-xs text-slate-500">
+                                    Stok: <strong class="text-navy-900">${p.stock} unit</strong> • 
+                                    Mulai: <strong class="text-gold-600">${formatRupiah(Math.min(...Object.values(p.prices).filter(v => v > 0)))}</strong>
+                                </p>
+                                <div class="flex flex-wrap gap-1.5 mt-1.5 text-[11px] text-slate-600">
+                                    <span class="bg-slate-100 px-2 py-0.5 rounded">90x200: ${formatRupiah(p.prices['90x200'])}</span>
+                                    <span class="bg-slate-100 px-2 py-0.5 rounded">160x200: ${formatRupiah(p.prices['160x200'])}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 self-end sm:self-center">
+                            <button onclick="editProduct('${p.id}')" class="px-3.5 py-2 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-pen"></i>
+                                <span>Edit</span>
+                            </button>
+                            <button onclick="deleteProduct('${p.id}')" class="px-3.5 py-2 rounded-xl ${isConfirming ? 'bg-rose-600 text-white animate-pulse' : 'bg-rose-50 hover:bg-rose-100 text-rose-600'} text-xs font-bold flex items-center gap-1.5 transition-all">
+                                <i class="fa-solid fa-trash"></i>
+                                <span>${isConfirming ? 'Klik Lagi Hapus!' : 'Hapus'}</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // =========================================================================
+        // 7. JALANKAN SAAT HALAMAN DIMUAT
+        // =========================================================================
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            renderProducts();
+            updateAdminNavStatus();
+        });
+    </script>
+</body>
+</html>
+```
